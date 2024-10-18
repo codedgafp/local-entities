@@ -63,6 +63,14 @@ class entity_controller extends controller_base {
                 case 'has_sub_entities' :
                     $entityid = $this->get_param('entityid', PARAM_INT);
                     return $this->success(self::has_sub_entities($entityid));
+                case 'get_deletable_subentities' :
+                    $searchtext = $this->get_param('searchtext', PARAM_TEXT);
+                    $entityid = $this->get_param('entityid', PARAM_INT);
+                    return $this->success(self::get_deletable_subentities($entityid, $searchtext));
+                case 'delete_subentity' :
+                    $subentityid = $this->get_param('subentityid', PARAM_INT);
+                    return $this->success(self::delete_subentity($subentityid));
+                
                 case 'get_managed_entities' :
                     $data = new \stdClass();
                     $data->start = 0;
@@ -225,6 +233,33 @@ class entity_controller extends controller_base {
         } else {
             throw new \moodle_exception('errormissingentityid', 'local_mentor_core');
         }
+    }
+
+    /**
+     * Delete subentity 
+     * @param int $subentityid
+     * @throws \dml_exception
+     * @throws moodle_exception
+     */
+    public static function delete_subentity($subentityid){
+        if (!is_int($subentityid)){
+            throw new \moodle_exception('errormissingsubentityid', 'local_mentor_core');
+        }
+        return local_mentor_core\entity_api::delete_subentity($subentityid);    
+    }
+
+
+    /**
+     * Get deletable subentities 
+     * @return array
+     * @throws \dml_exception
+     * @throws moodle_exception
+     */
+    public static function get_deletable_subentities($entityid, $searchtext){
+        if (!is_int($entityid)){
+            throw new \moodle_exception('errormissingentityid', 'local_mentor_core');
+        }
+        return local_mentor_core\entity_api::get_deletable_subentities($entityid, $searchtext);
     }
 
 

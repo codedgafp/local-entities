@@ -48,12 +48,16 @@ class admin_renderer extends \plugin_renderer_base {
         $this->page->requires->strings_for_js([
             'pleaserefresh',
             'save',
+            'delete',
             'cancel',
         ], 'format_edadmin');
 
         $this->page->requires->strings_for_js([
             'requiredfields',
             'entitynamelimit',
+            'nosubentitytodeletmessage', 
+            'confirmation',
+            'close'
         ], 'local_mentor_core');
 
         $this->page->requires->strings_for_js([
@@ -67,6 +71,7 @@ class admin_renderer extends \plugin_renderer_base {
             'langfile',
             'addentity',
             'addsubentity',
+            'deletesubentity',
             'viewroles',
             'setdefaultentity',
             'errormissingentityid',
@@ -107,6 +112,7 @@ class admin_renderer extends \plugin_renderer_base {
         $render .= entity_api::get_new_entity_form();
         $render .= entity_api::get_new_sub_entity_form();
         $render .= entity_api::get_default_entity_form();
+        $render .= entity_api::get_delete_subentity_form();
         return $render;
     }
 }

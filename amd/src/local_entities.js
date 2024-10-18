@@ -42,6 +42,18 @@ define([
                         }
                     });
                 }
+                
+                // Delete subentity
+                buttons.push({
+                    text: M.util.get_string('deletesubentity', 'local_entities'),
+                    attr: {
+                        id: 'deletesubentity',
+                        class: 'btn btn-primary'
+                    },
+                    action: function (e) {
+                        that.delete_subentity_modal(e, false);
+                    }
+                });
 
                 buttons.push({// Create sub entity
                     text: M.util.get_string('addsubentity', 'local_entities'),
