@@ -10,6 +10,7 @@ define([
     'jqueryui',
     'local_mentor_core/datatables',
     'local_mentor_core/datatables-buttons',
+    'local_mentor_specialization/common',
 ], function ($, format_edadmin, select2, mentor) {
     
     var local_entities = {
@@ -144,9 +145,12 @@ define([
                 },
                 dom: 'Bfrtip',
                 pageLength: 50,
+                language: { search: ""},
+                search: {return: true},
                 columns: columns,
                 //Header buttons
-                buttons: buttons
+                buttons: buttons,
+                initComplete: () => { addSearchButton("entities-table_filter") }
             });
         },
         /**
